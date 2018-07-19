@@ -1,6 +1,6 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import {composeWithDevTools} from "redux-devtools-extension";
-import thunk from 'react-thunk';
+import thunk from 'redux-thunk';
 
 const env = process.env.NODE_ENV;
 
@@ -21,4 +21,4 @@ if (env === 'development') {
   store = initialStatie => createStore(reducer, applyMiddleware(...middlewares));
 }
 
-export default store;
+export default store();

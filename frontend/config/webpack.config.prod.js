@@ -90,7 +90,7 @@ module.exports = {
     // for React Native Web.
     extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
     alias: {
-      
+
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
@@ -121,7 +121,7 @@ module.exports = {
             options: {
               formatter: eslintFormatter,
               eslintPath: require.resolve('eslint'),
-              
+
             },
             loader: require.resolve('eslint-loader'),
           },
@@ -149,7 +149,7 @@ module.exports = {
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
-              
+
               compact: true,
             },
           },
@@ -166,50 +166,57 @@ module.exports = {
           // use the "style" loader inside the async code so CSS from them won't be
           // in the main CSS file.
           {
-            test: /\.css$/,
+            test: /\.(css|scss)$/,
             loader: ExtractTextPlugin.extract(
               Object.assign(
                 {
-                  fallback: {
-                    loader: require.resolve('style-loader'),
-                    options: {
-                      hmr: false,
-                    },
-                  },
+                  fallback: require.resolve("style-loader"),
                   use: [
                     {
-                      loader: require.resolve('css-loader'),
+                      loader: require.resolve("css-loader"),
                       options: {
                         importLoaders: 1,
                         minimize: true,
+                        modules: true,
+                        localIdentName:
+                          "[path][name]__[local]--[hash:base64:5]",
                         sourceMap: shouldUseSourceMap,
-                      },
+                        camelCase: "dashes"
+                      }
                     },
                     {
-                      loader: require.resolve('postcss-loader'),
+                      loader: require.resolve("postcss-loader"),
                       options: {
                         // Necessary for external CSS imports to work
                         // https://github.com/facebookincubator/create-react-app/issues/2677
-                        ident: 'postcss',
+                        ident: "postcss",
                         plugins: () => [
-                          require('postcss-flexbugs-fixes'),
+                          require("postcss-flexbugs-fixes"),
                           autoprefixer({
                             browsers: [
-                              '>1%',
-                              'last 4 versions',
-                              'Firefox ESR',
-                              'not ie < 9', // React doesn't support IE8 anyway
+                              ">1%",
+                              "last 4 versions",
+                              "Firefox ESR",
+                              "not ie < 9" // React doesn't support IE8 anyway
                             ],
-                            flexbox: 'no-2009',
-                          }),
+                            flexbox: "no-2009"
+                          })
                         ],
-                      },
+                        sourceMap: true
+                      }
                     },
-                  ],
+                    {
+                      loader: require.resolve("sass-loader"),
+                      options: {
+                        sourceMap: true,
+                        data: `@import "${paths.appSrc}/config/_variables.scss";`
+                      }
+                    }
+                  ]
                 },
                 extractTextPluginOptions
               )
-            ),
+            )
             // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
           },
           // "file" loader makes sure assets end up in the `build` folder.
