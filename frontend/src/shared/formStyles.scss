@@ -1,6 +1,8 @@
 .form-component {
   display: flex;
   flex-direction: column;
+  margin-top: 5px;
+  margin-bottom: 25px;
 
   .form {
     display: flex;
@@ -37,9 +39,8 @@
     text-transform: uppercase;
     color: $dark-grey;
     font-weight: 600;
-    margin: 20px 0;
-    margin-bottom: 20px;
     position: relative;
+    margin: 20px 0;
     &:before {
       content: "";
       width: 42%;
