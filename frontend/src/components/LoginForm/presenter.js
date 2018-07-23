@@ -28,6 +28,8 @@ const LoginForm = (props) => (
       />
     </form>
     <span className={formStyles.divider}>or</span>
+
+    <span className={formStyles.forgotLink}>Forgot password?</span>
   </div>
 );
 

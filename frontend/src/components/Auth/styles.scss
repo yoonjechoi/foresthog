@@ -19,6 +19,15 @@
       text-align: center;
       padding: 15px;
       @include boxBorder(no);
+
+      .change-link {
+        color: $light-blue;
+        cursor: pointer;
+      }
+
+      .text {
+        margin: 15px;
+      }
     }
 
     .form-box {
@@ -27,6 +36,24 @@
       padding-top: 30px;
       img {
         height: 60px;
+      }
+    }
+
+    .app-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 35px;
+
+      .appstores {
+        margin-top: 25px;
+        img {
+          height: 40px;
+          &:first-child {
+            margin-right: 10px;
+          }
+        }
+
       }
     }
   }
