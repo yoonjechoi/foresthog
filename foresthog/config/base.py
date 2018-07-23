@@ -117,7 +117,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
+STATIC_ROOT = str(os.path.join(BASE_DIR, 'staticfiles'))
 STATIC_URL = '/static/'
+
+# See: https://docs.djangoproject.com/en/2.0/howto/static-files/
+STATICFILES_DIRS = [
+    str(os.path.join(os.path.join(BASE_DIR, 'foresthog'), 'static')),
+    str(os.path.join(os.path.join(os.path.join(BASE_DIR, 'frontend'), 'build'), 'static')),
+]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
