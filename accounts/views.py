@@ -1,11 +1,13 @@
 from django.contrib import auth
 # Create your views here.
-from rest_framework import status
+from oauth2_provider.contrib.rest_framework import OAuth2Authentication
+from rest_framework import status, permissions
 from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from accounts.serializers import SignupSerializer
+from accounts.serializers import SignupSerializer, UserSerializer
 
 
 class SignupView(CreateAPIView):
@@ -38,3 +40,11 @@ class SignupView(CreateAPIView):
         user.save()
 
 
+class WhoAmIView(APIView):
+    authentication_classes = (OAuth2Authentication, )
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        serializer = UserSerializer(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)

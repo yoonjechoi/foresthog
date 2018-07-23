@@ -1,5 +1,6 @@
 import pytest
 from django.contrib import auth
+from rest_framework import status
 from rest_framework.reverse import reverse
 
 
@@ -32,3 +33,17 @@ def test_signup_success(faker, api_client):
     assert 'password' not in response_data
 
     assert before_user_count + 1 == user_model.objects.count()
+
+
+@pytest.mark.django_db
+def test_whoami_success(access_token, api_client):
+    # Given:
+    user = access_token.user
+
+    # When:
+    url = reverse('accounts:whoami')
+    response = api_client.post(url, HTTP_AUTHORIZATION=f"Bearer {access_token.token}")
+
+    # Then:
+    assert response.status_code == status.HTTP_200_OK
+    assert user.username == response.data['username']
