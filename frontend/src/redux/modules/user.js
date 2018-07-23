@@ -12,12 +12,20 @@ function reducer(state = initialState, action) {
 
 function usernameLogin(username, password) {
   return dispatch => {
-    
+
   }
 }
 
+function createAccount(username, password, email, name) {
+  return dispatch => {
+
+  }
+}
+
+
 const actionCreators = {
-  usernameLogin
+  usernameLogin,
+  createAccount,
 };
 
 export {actionCreators};
