@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from . import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('rest_framework_social_oauth2.urls')),
@@ -23,4 +25,8 @@ urlpatterns = [
 
     # Use below url to authenticate for browsable api with web broswer,
     path('api-auth/', include('rest_framework.urls')),
+]
+
+urlpatterns += [
+    path('', views.ReactAppView.as_view()),
 ]
