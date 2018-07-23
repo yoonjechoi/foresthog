@@ -47,3 +47,15 @@ def test_whoami_success(access_token, api_client):
     # Then:
     assert response.status_code == status.HTTP_200_OK
     assert user.username == response.data['username']
+
+
+@pytest.mark.django_db
+def test_whoami_fail(api_client):
+    # Given:
+
+    # When:
+    url = reverse('accounts:whoami')
+    response = api_client.post(url, HTTP_AUTHORIZATION=f"Bearer {abcd1234}")
+
+    # Then:
+    assert response.status_code == status.HTTP_401_UNAUTHORIZED
