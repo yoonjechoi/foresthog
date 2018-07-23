@@ -7,7 +7,7 @@ class Container extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      action: "login"
+      action: "signup"
     };
   }
 
