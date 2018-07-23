@@ -21,5 +21,6 @@ urlpatterns = [
     path('auth/', include('rest_framework_social_oauth2.urls')),
 
     # Use below url to authenticate for browsable api with web broswer,
-    path('api-auth/', include('rest_framework.urls'))
+    path('api-auth/', include('rest_framework.urls')),
+    path('account/', include('accounts.urls', namespace='accounts')),
 ]

@@ -314,3 +314,4 @@ nomadgram/media/
 
 .idea
 *.sqlite*
+.pytest_cache

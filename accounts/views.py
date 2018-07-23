@@ -24,7 +24,7 @@ class SignupView(CreateAPIView):
         raw_data = serializer.data
         raw_data.pop('password', None)
         headers = self.get_success_headers(raw_data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        return Response(raw_data, status=status.HTTP_201_CREATED, headers=headers)
 
     def perform_create(self, serializer):
         validated_data = serializer.validated_data
