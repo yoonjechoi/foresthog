@@ -36,10 +36,10 @@ class Container extends Component {
 
   _handleSubmit = event => {
     const {createAccount} = this.props;
-    const {email, name, username, password} = this.state;
+    const {email, username, password} = this.state;
 
     event.preventDefault();
-    createAccount(username, password, email, name);
+    createAccount(email, username, password);
   };
 }
 

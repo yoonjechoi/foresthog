@@ -4,7 +4,7 @@ import Container from "./container";
 const mapStateToProps = (state, ownProps) => {
 
   return {
-    isLoggedIn: state.user.isLoggedIn
+    isLoggedIn: state.authentication.isLoggedIn
   };
 };
 

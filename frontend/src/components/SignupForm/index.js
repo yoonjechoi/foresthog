@@ -1,12 +1,11 @@
 import { connect} from "react-redux";
 import Container from "./container";
-
-import {actionCreators as userActions} from 'redux/modules/user';
+import {signupRequest} from 'actions/authentication';
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    createAccount: (username, password, email, name) => {
-      dispatch(userActions.createAccount(username, password, email, name));
+    createAccount: (email, username, password) => {
+      dispatch(signupRequest(email, username, password));
     },
   };
 };

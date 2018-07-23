@@ -1,7 +1,7 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import {composeWithDevTools} from "redux-devtools-extension";
 import thunk from 'redux-thunk';
-import user from 'redux/modules/user';
+import authentication from './authentication';
 
 const env = process.env.NODE_ENV;
 
@@ -12,7 +12,7 @@ if (env === 'development') {
   middlewares.push(logger);
 }
 
-const reducer = combineReducers({user});
+const reducer = combineReducers({authentication});
 
 let store;
 
