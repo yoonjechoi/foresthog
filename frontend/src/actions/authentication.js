@@ -38,7 +38,7 @@ export function signupRequest(email, username, password) {
       password
     };
 
-    return axios.post('/accounts/signup', data)
+    return axios.post('/accounts/signup/', data)
       .then((response) => {
         dispatch(signupSuccess());
       })
