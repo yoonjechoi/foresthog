@@ -2,9 +2,8 @@ import {connect} from "react-redux";
 import Container from "./container";
 
 const mapStateToProps = (state, ownProps) => {
-
   return {
-    isLoggedIn: state.authentication.isLoggedIn
+    isLoggedIn: state.authentication.get('isLoggedIn')
   };
 };
 
