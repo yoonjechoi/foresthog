@@ -1,9 +1,11 @@
-import {AUTH_SIGNUP, AUTH_SIGNUP_FAILURE, AUTH_SIGNUP_SUCCESS} from 'actions/ActionTypes';
+import {AUTH_SIGNUP, AUTH_SIGNUP_FAILURE, AUTH_SIGNUP_SUCCESS, AUTH_TOGGLE_ACTION} from 'actions/ActionTypes';
 import {Map, List} from 'immutable';
 
 const initialState = Map({
   isLoggedIn: 'access_token' in localStorage,
   access_token: localStorage.getItem('access_token'),
+
+  action: 'login',
 
   login: Map({
     status: 'INIT'
@@ -28,6 +30,10 @@ export default function authentication(state = initialState, action) {
     case AUTH_SIGNUP_FAILURE:
       return state.setIn(['register', 'status'], 'FAILURE')
                   .setIn(['register', 'error'], Map(action.error));
+    case AUTH_TOGGLE_ACTION:
+      const toggleMap = {login: 'signup', signup: 'login'}
+      const nextAction = toggleMap[state.get('action')]
+      return state.set('action', nextAction);
 
     default:
       return state;

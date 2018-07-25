@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import Container from "./container";
-
+import {toggleAction} from 'actions/authentication';
 
 // Add all the actions for:
 // Log in
@@ -9,5 +9,20 @@ import Container from "./container";
 // Check username
 // Check password
 
+const mapStateToProps = (state, ownProps) => {
+  const {authentication} = state;
 
-export default connect()(Container);
+  return {
+    action: authentication.get('action')
+  };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    onToggleAction: () => {
+      return dispatch(toggleAction())
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Container);

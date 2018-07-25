@@ -5,7 +5,7 @@ import {signupRequest} from 'actions/authentication';
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     createAccount: (email, username, password) => {
-      dispatch(signupRequest(email, username, password));
+      return dispatch(signupRequest(email, username, password));
     },
   };
 };

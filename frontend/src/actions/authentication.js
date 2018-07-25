@@ -2,6 +2,7 @@ import {
   AUTH_SIGNUP,
   AUTH_SIGNUP_SUCCESS,
   AUTH_SIGNUP_FAILURE,
+  AUTH_TOGGLE_ACTION,
 } from "./ActionTypes";
 
 import axios from 'axios';
@@ -45,6 +46,15 @@ export function signupRequest(email, username, password) {
       .catch((error) => {
         dispatch(signupFailure(error));
       });
+  };
+}
+
+
+/* toggle auth action( between login and signup) */
+
+export function toggleAction() {
+  return {
+     type: AUTH_TOGGLE_ACTION,
   };
 }
 
