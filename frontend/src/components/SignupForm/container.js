@@ -43,7 +43,7 @@ class Container
   };
 
   _handleSubmit = event => {
-    const {createAccount} = this.props;
+    const {createAccount, onSignupSuccess} = this.props;
     const {data} = this.state;
     const {email, username, password} = data.toJS();
 
@@ -53,12 +53,15 @@ class Container
         this.setState({
           data: initialState
         });
+
+        onSignupSuccess();
       });
   };
 }
 
 Container.propTypes = {
-  createAccount: PropTypes.func.isRequired
+  createAccount: PropTypes.func.isRequired,
+  onSignupSuccess: PropTypes.func.isRequired
 };
 
 

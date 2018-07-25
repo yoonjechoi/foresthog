@@ -21,7 +21,7 @@ class Auth extends Component {
           <div className={`${styles.whiteBox} ${styles.formBox}`}>
             <img src={require("images/logo.png")} alt="Logo"/>
             {action == "login" && <LoginForm/>}
-            {action == "signup" && <SignupForm/>}
+            {action == "signup" && <SignupForm onSignupSuccess={this.handleToggleAction}/>}
           </div>
           <div className={styles.whiteBox}>
             {action == "login" && (
