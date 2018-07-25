@@ -6,12 +6,15 @@ import Footer from 'components/Footer';
 import Auth from 'components/Auth';
 
 const App = props => [
+
+  props.whoAmIStatus == 'WAITING' ? <h1>Waiting for login</h1> : undefined,
   props.isLoggedIn ? <PrivateRoutes key={2} /> :  <PublicRoutes key={2}/>,
   <Footer key={3}/>
 ];
 
 App.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
+  whoAmIStatus: PropTypes.string.isRequired,
 };
 
 

@@ -1,10 +1,20 @@
 import {connect} from "react-redux";
 import Container from "./container";
+import {whoAmIRequest} from "actions/authentication";
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    isLoggedIn: state.authentication.get('isLoggedIn')
+    isLoggedIn: state.authentication.get('isLoggedIn'),
+    whoAmIStatus: state.authentication.getIn(['whoami', 'status'])
   };
 };
 
-export default connect(mapStateToProps)(Container);
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    whoAmIRequest: () => {
+      return dispatch(whoAmIRequest());
+    }
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Container);

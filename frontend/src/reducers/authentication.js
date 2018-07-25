@@ -5,22 +5,31 @@ import {
   AUTH_SIGNUP,
   AUTH_SIGNUP_FAILURE,
   AUTH_SIGNUP_SUCCESS,
-  AUTH_TOGGLE_ACTION
+  AUTH_TOGGLE_ACTION,
+  AUTH_WHO_AM_I,
+  AUTH_WHO_AM_I_FAILURE,
+  AUTH_WHO_AM_I_SUCCESS,
 } from 'actions/ActionTypes';
 import {Map} from 'immutable';
 
+
 const initialState = Map({
-  isLoggedIn: localStorage.getItem('accessToken') ? true : false,
-  access_token: localStorage.getItem('accessToken'),
-  username: localStorage.getItem('username'),
+  isLoggedIn: false,
+  access_token: '',
+  username: '',
 
   action: 'login',
 
   login: Map({
-    status: 'INIT'
+    status: 'INIT',
   }),
 
   register: Map({
+    status: 'INIT',
+    error: -1,
+  }),
+
+  whoami: Map({
     status: 'INIT',
     error: -1,
   }),
@@ -45,11 +54,32 @@ export default function authentication(state = initialState, action) {
       const nextAction = toggleMap[state.get('action')]
       return state.set('action', nextAction);
 
-    case AUTH_LOGIN_SUCCESS:
+    case AUTH_LOGIN_SUCCESS: {
       const {username, accessToken} = action;
-      return state.set('username', username)
+      return state.setIn(['login', 'status'], 'SUCCESS')
+        .set('username', username)
         .set('accessToken', accessToken)
         .set('isLoggedIn', true);
+    }
+
+    case AUTH_WHO_AM_I:
+      return state.setIn(['whoami', 'status'], 'WAITING');
+
+    case AUTH_WHO_AM_I_SUCCESS: {
+      const {username, accessToken} = action;
+      return state.setIn(['whoami', 'status'], 'SUCCESS')
+        .set('username', username)
+        .set('accessToken', accessToken)
+        .set('isLoggedIn', true);
+    }
+
+    case AUTH_WHO_AM_I_FAILURE:
+      const {error} = action;
+      return state.set('whoami', Map({status: 'FAILURE', error}))
+        .set('isLoggedIn', false)
+        .set('username', undefined)
+        .set('accessToken', undefined);
+
 
     default:
       return state;
