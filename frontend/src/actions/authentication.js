@@ -114,7 +114,7 @@ export function loginRequest(username, password) {
           expiresIn: response.data.expires_in,
           tokenType: response.data.token_type,
           scope: response.data.scope,
-        }
+        };
 
         localStorage.setItem(KEY_AUTH_DATA, btoa(JSON.stringify(authData)));
         localStorage.setItem(KEY_ACCESS_TOKEN, authData.accessToken);
@@ -133,9 +133,11 @@ export function whoAmI() {
   };
 }
 
-export function whoAmISuccess() {
+export function whoAmISuccess(username, accessToken) {
   return {
     type: AUTH_WHO_AM_I_SUCCESS,
+    username,
+    accessToken,
   }
 }
 
@@ -171,7 +173,7 @@ export function whoAmIRequest() {
         Authorization: `${authData.tokenType} ${authData.accessToken}`,
       };
 
-      return axios.post('/api/whoami/', undefined, {headers})
+      return axios.post('/accounts/whoami/', undefined, {headers})
         .then((response) => {
           const {username} = response.data;
 

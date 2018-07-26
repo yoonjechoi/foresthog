@@ -15,7 +15,7 @@ import {Map} from 'immutable';
 
 const initialState = Map({
   isLoggedIn: false,
-  access_token: '',
+  accessToken: '',
   username: '',
 
   action: 'login',

@@ -15,16 +15,15 @@ class Container extends Component {
       const {whoAmIRequest} = this.props;
       whoAmIRequest();
     }
-
   }
 
   render() {
-    const {isLoggedIn, whoAmIStatus} = this.props;
+    const {isLoggedIn} = this.props;
 
 
 
     return (
-      <App isLoggedIn={isLoggedIn} whoAmIStatus={whoAmIStatus}/>
+      <App isLoggedIn={isLoggedIn} />
     );
   }
 }
