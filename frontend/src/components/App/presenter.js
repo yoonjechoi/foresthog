@@ -4,6 +4,7 @@ import styles from './styles.scss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Footer from 'components/Footer';
 import Auth from 'components/Auth';
+import Feed from 'components/Feed';
 
 const App = props => [
   props.isLoggedIn ? <PrivateRoutes key={2} /> :  <PublicRoutes key={2}/>,
@@ -12,13 +13,12 @@ const App = props => [
 
 App.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
-  whoAmIStatus: PropTypes.string.isRequired,
 };
 
 
 const PrivateRoutes = props => (
   <Switch>
-    <h1>Private Routes</h1>
+    <Route exact path="/" render={props => (<Feed loading={true}/>)}></Route>
   </Switch>
 );
 

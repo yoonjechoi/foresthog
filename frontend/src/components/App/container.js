@@ -31,7 +31,6 @@ class Container extends Component {
 Container.propTypes = {
   whoAmIRequest: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
-  whoAmIStatus: PropTypes.string.isRequired,
 };
 
 export default Container;
