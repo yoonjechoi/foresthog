@@ -11,7 +11,8 @@ const App = props => [
 ];
 
 App.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
+  whoAmIStatus: PropTypes.string.isRequired,
 };
 
 

@@ -17,9 +17,9 @@ const reducer = combineReducers({authentication});
 let store;
 
 if (env === 'development') {
-  store = initialStatie => createStore(reducer, composeWithDevTools(applyMiddleware(...middlewares)));
+  store = initialState => createStore(reducer, composeWithDevTools(applyMiddleware(...middlewares)));
 } else {
-  store = initialStatie => createStore(reducer, applyMiddleware(...middlewares));
+  store = initialState => createStore(reducer, applyMiddleware(...middlewares));
 }
 
 export default store();

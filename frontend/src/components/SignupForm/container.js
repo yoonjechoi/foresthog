@@ -1,21 +1,27 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 import SignupForm from "./presenter";
+import {Map} from "immutable";
 
 
-class Container extends Component {
+const initialState = Map({
+  email: "",
+  name: "",
+  username: "",
+  password: ""
+})
+
+class Container
+  extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      name: "",
-      username: "",
-      password: ""
+      data: initialState
     };
   }
 
   render() {
-    const {email, name, username, password} = this.state;
+    const {email, name, username, password} = this.state.data.toJS();
     return (
       <SignupForm
         emailValue={email}
@@ -28,23 +34,34 @@ class Container extends Component {
   }
 
   _handleInputChange = event => {
+    const {data} = this.state;
     const {target: {name, value}} = event;
+
     this.setState({
-      [name]: value
+      data: data.set(name, value)
     });
   };
 
   _handleSubmit = event => {
-    const {createAccount} = this.props;
-    const {email, username, password} = this.state;
+    const {createAccount, onSignupSuccess} = this.props;
+    const {data} = this.state;
+    const {email, username, password} = data.toJS();
 
     event.preventDefault();
-    createAccount(email, username, password);
+    createAccount(email, username, password)
+      .then(() => {
+        this.setState({
+          data: initialState
+        });
+
+        onSignupSuccess();
+      });
   };
 }
 
 Container.propTypes = {
-  createAccount: PropTypes.func.isRequired
+  createAccount: PropTypes.func.isRequired,
+  onSignupSuccess: PropTypes.func.isRequired
 };
 
 

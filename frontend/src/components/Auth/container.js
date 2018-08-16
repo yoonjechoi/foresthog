@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import PropTypes from 'prop-types';
 import Auth from './presenter';
 
 // TODO: If the user is logged in, call API
@@ -6,34 +7,18 @@ import Auth from './presenter';
 class Container extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      action: "signup"
-    };
   }
 
   render() {
-    const {action} = this.state;
     return (
-      <Auth action={action} changeAction={this._changeAction}/>
+      <Auth {...this.props}/>
     );
   }
-
-  _changeAction = () => {
-    this.setState(prevState => {
-      const {action} = prevState;
-
-      switch (action) {
-        case "login":
-          return {
-            action: "signup"
-          };
-        case "signup":
-          return {
-            action: "login"
-          }
-      }
-    });
-  };
 }
+
+Container.propTypes = {
+  onToggleAction: PropTypes.func.isRequired,
+  action: PropTypes.string.isRequired
+};
 
 export default Container;
