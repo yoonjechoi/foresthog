@@ -66,9 +66,10 @@ export default function authentication(state = initialState, action) {
       return state.setIn(['whoami', 'status'], 'WAITING');
 
     case AUTH_WHO_AM_I_SUCCESS: {
-      const {username, accessToken} = action;
+      const {username, tokenType, accessToken} = action;
       return state.setIn(['whoami', 'status'], 'SUCCESS')
         .set('username', username)
+        .set('tokenType', tokenType)
         .set('accessToken', accessToken)
         .set('isLoggedIn', true);
     }

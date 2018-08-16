@@ -133,10 +133,11 @@ export function whoAmI() {
   };
 }
 
-export function whoAmISuccess(username, accessToken) {
+export function whoAmISuccess(username, tokenType, accessToken) {
   return {
     type: AUTH_WHO_AM_I_SUCCESS,
     username,
+    tokenType,
     accessToken,
   }
 }
@@ -185,7 +186,7 @@ export function whoAmIRequest() {
             localStorage.setItem(KEY_AUTH_DATA, btoa(JSON.stringify(authData)));
           }
 
-          dispatch(whoAmISuccess(username));
+          dispatch(whoAmISuccess(username, authData.tokenType, authData.accessToken));
         })
         .catch((error) => {
           localStorage.removeItem(KEY_AUTH_DATA);
